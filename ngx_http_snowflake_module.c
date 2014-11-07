@@ -161,7 +161,7 @@ ngx_http_snowflake_handler(ngx_http_request_t *r)
     id = sf_id(conf);
 
     body_len += snprintf(body, 128,
-        "{\"id\":\"%lX\",\"server_id\":\"%lu\",\"worker_id\":\"%lu\",\"timestamp\":\"%lu\"}",
+        "{\"id\":\"%lu\",\"server_id\":\"%lu\",\"worker_id\":\"%lu\",\"timestamp\":\"%lu\"}",
 	id,
         conf->server_id,
         conf->worker_id,
@@ -214,7 +214,7 @@ ngx_http_snowflake_conf(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 
     if(sf_conf->server_id > sf_conf->server_id_mask) {
          ngx_conf_log_error(NGX_LOG_WARN, cf, 0,
-            "sf_server_id is too long, should be cut off"); 
+             "sf_server_id is too long, should be cut off"); 
     }
 
     clcf = ngx_http_conf_get_module_loc_conf(cf, ngx_http_core_module);
